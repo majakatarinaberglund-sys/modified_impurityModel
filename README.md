@@ -1,0 +1,5 @@
+A modified version of the codes 'get_spectra_using_CF' and 'finite', 
+which are a part of the program impurityModel originally written by Johan Schött, is seen in this repository. 
+The original versions are found using the link: https://github.com/JohanSchott/impurityModel/. 
+
+The modified version was created as part of my Bachelor's thesis.
