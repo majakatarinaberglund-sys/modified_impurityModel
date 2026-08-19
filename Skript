@@ -1,0 +1,165 @@
+#!/bin/bash
+#SBATCH -t 01:00:00
+#SBATCH -N 1
+#SBATCH -A naiss2026-4-535
+
+#mv *impurity.log archive/
+# Script folder
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# Mn in MnO
+# Non-interacting Hamiltonian constructed from CF-parameters.
+
+# Filename of the radial part of the correlated orbitals.
+#radial_filename=${HOME}"/work/decoherence/work/test/Mn3d.dat"
+#echo "Radial wavefunction filename: $radial_filename"
+#
+#e_vval_0list="-1" 
+e_vval_0list="-0.9" 
+#e_vval_13list="-1"
+e_vval_13list="-1.5" #^
+#e_vval_24list="-0.9"
+e_vval_24list="-1.5" #^
+
+#e_vcon_0list="0.14" 
+e_vcon_0list="0.15" 
+#e_vcon_13list="0.13"
+e_vcon_13list="0.0" #^
+#e_vcon_24list="0.0"
+e_vcon_24list="0.0" #^
+
+#v_vval_0list="0.5" 
+v_vval_0list="0.25"
+#v_vval_13list="0.5"
+v_vval_13list="0.25"
+#v_vval_24list="0.75"
+v_vval_24list="0.5"
+
+#v_vcon_0list="1" 
+v_vcon_0list="0.5"
+#v_vcon_13list="0.9"
+v_vcon_13list="1.5"
+#v_vcon_24list="0.9"
+v_vcon_24list="0.5"
+
+e_v4040list="0.01 0.02 0.03 0.04 0.05" 
+
+v_v4043list="0.06"
+#v_v4043list="0.040 0.045 0.050 0.055 0.060 0.065 0.070 0.075 0.080" 
+
+
+
+for e_vval_0 in $e_vval_0list
+do
+ echo "Kör med e_vval_0: $e_vval_0"
+ for e_vval_13 in $e_vval_13list
+ do
+  echo "Kör med e_vval_13: $e_vval_13"
+  for e_vval_24 in $e_vval_24list
+  do
+   echo "kör med e_vval_24: $e_vval_24"
+   for e_vcon_0 in $e_vcon_0list
+   do
+    echo "kör med e_vcon_0: $e_vcon_0"
+    for e_vcon_13 in $e_vcon_13list
+    do
+     echo "kör med e_vcon_13: $e_vcon_13"
+     for e_vcon_24 in $e_vcon_24list
+     do 
+      echo "kör med e_vcon_24: $e_vcon_24"
+      for v_vval_0 in $v_vval_0list
+      do
+       echo "kör med v_vval_0: $v_vval_0"
+       for v_vval_13 in $v_vval_13list
+       do
+        echo "kör med v_vval_13: $v_vval_13"
+	for v_vval_24 in $v_vval_24list
+	do
+         echo "kör med v_vval_24: $v_vval_24"
+	 for v_vcon_0 in $v_vcon_0list
+	 do
+	  echo "kör med v_vcon_0: $v_vcon_0"
+	  for v_vcon_13 in $v_vcon_13list
+	  do
+           echo "kör med v_vcon_13: $v_vcon_13"
+           for v_vcon_24 in $v_vcon_24list
+           do
+	    echo "kör med v_vcon_24: $v_vcon_24"
+	    for e_v4040 in $e_v4040list
+	    do
+	     echo "kör med e_v4040: $e_v4040"
+	     for v_v4043 in $v_v4043list
+	     do
+	      echo "kör med v_v4043: $v_v4043"
+
+	      mpprun python -m impurityModel.ed.get_spectra_using_CF --e_vval $e_vval_0 $e_vval_13 $e_vval_24 $e_vval_13 $e_vval_24 --e_vcon $e_vcon_0 $e_vcon_13 $e_vcon_24 $e_vcon_13 $e_vcon_24 --v_vval $v_vval_0 $v_vval_13 $v_vval_24 $v_vval_13 $v_vval_24 --v_vcon $v_vcon_0 $v_vcon_13 $v_vcon_24 $v_vcon_13 $v_vcon_24 --e_v4040 $e_v4040 --v_v4043 $v_v4043 > impurity_$e_vval_0\_$e_vval_13\_$e_vval_24\_$e_vcon_0\_$e_vcon_13\_$e_vcon_24\_$v_vval_0\_$v_vval_13\_$v_vval_24\_$v_vcon_0\_$v_vcon_13\_$v_vcon_24\_$e_v4040\_$v_v4043.log  
+              if [ -f stop ]
+              then
+               break    
+              fi
+             done
+             if [ -f stop ]
+             then
+              break    
+             fi
+            done
+            if [ -f stop ]
+            then
+             break    
+            fi
+           done
+           if [ -f stop ]
+           then
+            break    
+           fi
+          done
+          if [ -f stop ]
+          then
+           break    
+          fi
+         done
+         if [ -f stop ]
+         then
+          break    
+         fi
+        done
+        if [ -f stop ]
+        then
+         break    
+        fi
+       done
+       if [ -f stop ]
+       then
+        break    
+       fi
+      done
+      if [ -f stop ]
+      then
+       break
+      fi
+     done
+     if [ -f stop ]
+     then
+      break
+     fi
+    done 
+    if [ -f stop ]
+    then
+     break
+    fi
+   done
+   if [ -f stop ]
+   then
+    break
+   fi
+  done
+  if [ -f stop ]
+  then
+   break
+  fi
+ done
+ if [ -f stop ]
+ then
+  break
+ fi
+done
